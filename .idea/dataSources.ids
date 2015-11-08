@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component name="dataSourceStorage">
+  <data-source name="MySQL - test_platform2@localhost" uuid="2a7bf291-e494-4559-848b-c507bca4a723">
+    <database-info product="MySQL" version="5.7.9-log" jdbc-version="4.0" driver-name="MySQL Connector Java" driver-version="mysql-connector-java-5.1.35 ( Revision: 5fb9c5849535c13917c2cf9baaece6ef9693ef27 )">
+      <extra-name-characters>#@</extra-name-characters>
+      <identifier-quote-string>`</identifier-quote-string>
+    </database-info>
+    <case-sensitivity plain-identifiers="lower" quoted-identifiers="lower"/>
+    <schema name="" catalog="test_platform2"/>
+    <table name="tests" schema="" catalog="test_platform2" type="TABLE">
+      <column name="id_test" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="title" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="id_test"/>
+      <exported-key name="fk_users_has_tests_tests1" table="user_pass" schema="" catalog="test_platform2" columns="id_test"/>
+    </table>
+    <table name="user_pass" schema="" catalog="test_platform2" type="TABLE">
+      <column name="id_user" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="id_test" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="date" sqlType="DATE" precision="10" scale="0" nullable="true" jdbcType="91"/>
+      <primary-key name="PRIMARY" columns="id_user,id_test"/>
+      <foreign-key name="fk_users_has_tests_tests1" columns="id_test" ref-table="tests" ref-schema="" ref-catalog="test_platform2" ref-columns="id_test" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="fk_users_has_tests_users" columns="id_user" ref-table="users" ref-schema="" ref-catalog="test_platform2" ref-columns="id_user" update-rule="3" delete-rule="3" deferrability="2"/>
+      <index name="fk_users_has_tests_tests1_idx" unique="false" columns="id_test"/>
+      <index name="fk_users_has_tests_users_idx" unique="false" columns="id_user"/>
+    </table>
+    <table name="users" schema="" catalog="test_platform2" type="TABLE">
+      <column name="id_user" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="login" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="id_user"/>
+      <exported-key name="fk_users_has_tests_users" table="user_pass" schema="" catalog="test_platform2" columns="id_user"/>
+    </table>
+  </data-source>
+</component>
