@@ -18,6 +18,10 @@ public class Test {
         this.users=users;
     }
 
+    public void addUser(User user){
+        users.add(user);
+    }
+
     @Id
     @Column(name = "id_test")
     @GeneratedValue(strategy= GenerationType.AUTO)
@@ -39,7 +43,7 @@ public class Test {
     }
 
     @ManyToMany(cascade=CascadeType.ALL)
-    @JoinTable(name="user_pass", joinColumns=@JoinColumn(name="id_test"), inverseJoinColumns=@JoinColumn(name="id_user"))
+    @JoinTable(name="user_pass", joinColumns = { @JoinColumn(name = "id_test") }, inverseJoinColumns = { @JoinColumn(name = "id_user") })
     public Set<User> getUsers() {
         return users;
     }

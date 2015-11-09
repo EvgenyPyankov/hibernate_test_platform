@@ -18,6 +18,10 @@ public class User {
         this.tests=tests;
     }
 
+    public void addTest(Test test){
+        tests.add(test);
+    }
+
     @Id
     @Column(name = "id_user")
     @GeneratedValue(strategy= GenerationType.AUTO)

@@ -8,8 +8,23 @@ import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 import org.hibernate.service.ServiceRegistryBuilder;
 
-public class DBController {
-    private static SessionFactory factory;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+public class DBController implements DBControllerMethods{
+    private static SessionFactory sessionFactory;
+
+    public List<Test> getTests() {
+        Session session = sessionFactory.openSession();
+        session.beginTransaction();
+        List<Test> tests= new ArrayList<Test>();
+        tests = session.createCriteria(Test.class).list();
+        session.close();
+        return  tests;
+    }
+
     public static void main(String[] args) {
         Configuration configuration = new Configuration().configure();
         ServiceRegistryBuilder registry = new ServiceRegistryBuilder();
@@ -17,7 +32,7 @@ public class DBController {
         ServiceRegistry serviceRegistry = registry.buildServiceRegistry();
 
         // builds a session factory from the service registry
-        SessionFactory sessionFactory = configuration
+        sessionFactory = configuration
                 .buildSessionFactory(serviceRegistry);
 
         // obtains the session
@@ -41,15 +56,28 @@ public class DBController {
 //
 //        session.save(groupAdmin);
 //        session.save(groupGuest);
-        User user1 = new User();
-        user1.setLogin("Johnny");
+
         Test test1 = new Test();
-        test1.setTitle("test1");
+        test1.setTitle("test2");
+
+        HashSet<Test> tests = new HashSet<Test>();
+        tests.add(test1);
+        User user1 = new User();
+        user1.setLogin("John");
+
+
+
+
         session.save(user1);
         session.save(test1);
 
+
         session.getTransaction().commit();
+
+
         session.close();
+
+
 
 
     }
