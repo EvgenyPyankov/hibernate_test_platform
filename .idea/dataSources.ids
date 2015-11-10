@@ -9,7 +9,8 @@
     <schema name="" catalog="test_platform2"/>
     <table name="tests" schema="" catalog="test_platform2" type="TABLE">
       <column name="id_test" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
-      <column name="title" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <column name="title" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="test_category" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
       <primary-key name="PRIMARY" columns="id_test"/>
       <exported-key name="fk_users_has_tests_tests1" table="user_pass" schema="" catalog="test_platform2" columns="id_test"/>
     </table>

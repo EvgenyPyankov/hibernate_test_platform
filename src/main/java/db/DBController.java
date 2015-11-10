@@ -1,6 +1,7 @@
 package db;
 
 import db.entity.Test;
+import db.entity.TestCategory;
 import db.entity.User;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -59,6 +60,7 @@ public class DBController implements DBControllerMethods{
 
         Test test1 = new Test();
         test1.setTitle("test2");
+        test1.setTestCategory(TestCategory.MATH);
 
         HashSet<Test> tests = new HashSet<Test>();
         tests.add(test1);

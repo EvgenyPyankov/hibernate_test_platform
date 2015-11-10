@@ -9,6 +9,7 @@ import java.util.Set;
 public class Test {
     private int idTest;
     private String title;
+    private TestCategory testCategory;
     private Set<User> users = new HashSet<User>();
 
     public Test(){}
@@ -40,6 +41,16 @@ public class Test {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    @Column(name = "test_category")
+    @Enumerated(EnumType.STRING)
+    public TestCategory getTestCategory() {
+        return testCategory;
+    }
+
+    public void setTestCategory(TestCategory testCategory) {
+        this.testCategory = testCategory;
     }
 
     @ManyToMany(cascade=CascadeType.ALL)
