@@ -17,6 +17,8 @@
         </property>
         <mapping class="db.entity.Test"/>
         <mapping class="db.entity.User"/>
+        <mapping class="db.entity.Question"/>
+        <mapping class="db.entity.Answer"/>
         <!-- DB schema will be updated if needed -->
         <!-- <property name="hbm2ddl.auto">update</property> -->
     </session-factory>

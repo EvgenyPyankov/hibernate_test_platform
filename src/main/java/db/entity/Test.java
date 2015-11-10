@@ -1,5 +1,7 @@
 package db.entity;
 
+import com.sun.xml.internal.messaging.saaj.packaging.mime.util.QEncoderStream;
+
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
@@ -10,18 +12,21 @@ public class Test {
     private int idTest;
     private String title;
     private TestCategory testCategory;
-    private Set<User> users = new HashSet<User>();
+    private Set<Question>questions = new HashSet<Question>();
+   // private Set<User> users = new HashSet<User>();
 
     public Test(){}
 
-    public Test(String title, Set users){
+    public Test(String title, TestCategory testCategory,Set<Question> questions){
         this.title = title;
-        this.users=users;
+        this.testCategory=testCategory;
+        this.questions=questions;
+       // this.users=users;
     }
 
-    public void addUser(User user){
-        users.add(user);
-    }
+//    public void addUser(User user){
+//        users.add(user);
+//    }
 
     @Id
     @Column(name = "id_test")
@@ -53,15 +58,24 @@ public class Test {
         this.testCategory = testCategory;
     }
 
-    @ManyToMany(cascade=CascadeType.ALL)
-    @JoinTable(name="user_pass", joinColumns = { @JoinColumn(name = "id_test") }, inverseJoinColumns = { @JoinColumn(name = "id_user") })
-    public Set<User> getUsers() {
-        return users;
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "test")
+    public Set<Question> getQuestions() {
+        return questions;
     }
 
-    public void setUsers(Set users) {
-        this.users = users;
+    public void setQuestions(Set<Question> questions) {
+        this.questions = questions;
     }
+
+//    @ManyToMany(cascade=CascadeType.ALL)
+//    @JoinTable(name="user_pass", joinColumns = { @JoinColumn(name = "id_test") }, inverseJoinColumns = { @JoinColumn(name = "id_user") })
+//    public Set<User> getUsers() {
+//        return users;
+//    }
+//
+//    public void setUsers(Set users) {
+//        this.users = users;
+//    }
 
 
 }

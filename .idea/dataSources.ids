@@ -7,11 +7,31 @@
     </database-info>
     <case-sensitivity plain-identifiers="lower" quoted-identifiers="lower"/>
     <schema name="" catalog="test_platform2"/>
+    <table name="answers" schema="" catalog="test_platform2" type="TABLE">
+      <column name="id_answer" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="title" sqlType="VARCHAR" precision="100" scale="0" nullable="false" jdbcType="12"/>
+      <column name="number" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="id_question" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="id_answer"/>
+      <foreign-key name="fk_answers_questions1" columns="id_question" ref-table="questions" ref-schema="" ref-catalog="test_platform2" ref-columns="id_question" update-rule="3" delete-rule="3" deferrability="2"/>
+      <index name="fk_answers_questions1_idx" unique="false" columns="id_question"/>
+    </table>
+    <table name="questions" schema="" catalog="test_platform2" type="TABLE">
+      <column name="id_question" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="title" sqlType="VARCHAR" precision="300" scale="0" nullable="false" jdbcType="12"/>
+      <column name="number" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="id_test" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="id_question"/>
+      <foreign-key name="fk_questions_tests1" columns="id_test" ref-table="tests" ref-schema="" ref-catalog="test_platform2" ref-columns="id_test" update-rule="3" delete-rule="3" deferrability="2"/>
+      <exported-key name="fk_answers_questions1" table="answers" schema="" catalog="test_platform2" columns="id_question"/>
+      <index name="fk_questions_tests1_idx" unique="false" columns="id_test"/>
+    </table>
     <table name="tests" schema="" catalog="test_platform2" type="TABLE">
       <column name="id_test" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
       <column name="title" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
       <column name="test_category" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
       <primary-key name="PRIMARY" columns="id_test"/>
+      <exported-key name="fk_questions_tests1" table="questions" schema="" catalog="test_platform2" columns="id_test"/>
       <exported-key name="fk_users_has_tests_tests1" table="user_pass" schema="" catalog="test_platform2" columns="id_test"/>
     </table>
     <table name="user_pass" schema="" catalog="test_platform2" type="TABLE">
@@ -26,7 +46,9 @@
     </table>
     <table name="users" schema="" catalog="test_platform2" type="TABLE">
       <column name="id_user" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
-      <column name="login" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <column name="login" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="password" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="email" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
       <primary-key name="PRIMARY" columns="id_user"/>
       <exported-key name="fk_users_has_tests_users" table="user_pass" schema="" catalog="test_platform2" columns="id_user"/>
     </table>

@@ -9,18 +9,20 @@ import java.util.Set;
 public class User {
     private int idUser;
     private String login;
-    private Set<Test> tests = new HashSet<Test>();
+    private int password;
+    private String email;
+   // private Set<Test> tests = new HashSet<Test>();
 
     public User(){}
 
     public User(String login, Set<Test> tests){
         this.login = login;
-        this.tests=tests;
+       // this.tests=tests;
     }
 
-    public void addTest(Test test){
-        tests.add(test);
-    }
+   // public void addTest(Test test){
+    //    tests.add(test);
+    //}
 
     @Id
     @Column(name = "id_user")
@@ -42,12 +44,30 @@ public class User {
         this.login = login;
     }
 
-    @ManyToMany(mappedBy = "users")
-    public Set<Test> getTests() {
-        return tests;
+    @Column(name="password")
+    public int getPassword() {
+        return password;
     }
 
-    public void setTests(Set tests) {
-        this.tests = tests;
+    public void setPassword(int password) {
+        this.password = password;
     }
+
+    @Column(name="email")
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+//    @ManyToMany(mappedBy = "users")
+//    public Set<Test> getTests() {
+//        return tests;
+//    }
+//
+//    public void setTests(Set tests) {
+//        this.tests = tests;
+//    }
 }

@@ -1,5 +1,6 @@
 package db;
 
+import db.entity.Question;
 import db.entity.Test;
 import db.entity.TestCategory;
 import db.entity.User;
@@ -62,16 +63,27 @@ public class DBController implements DBControllerMethods{
         test1.setTitle("test2");
         test1.setTestCategory(TestCategory.MATH);
 
-        HashSet<Test> tests = new HashSet<Test>();
-        tests.add(test1);
-        User user1 = new User();
-        user1.setLogin("John");
+        //Set<Question> questions = new HashSet<Question>();
+        //questions.add(new Question("hey",1,test1));
+
+        Question question1 = new Question("hey",1,test1);
+
+        test1.getQuestions().add(question1);
 
 
 
-
-        session.save(user1);
+//        HashSet<Test> tests = new HashSet<Test>();
+//        tests.add(test1);
+//        User user1 = new User();
+//        user1.setLogin("John");
+//
+//
+//
+//
+//        session.save(user1);
         session.save(test1);
+        session.save(question1);
+
 
 
         session.getTransaction().commit();
