@@ -11,7 +11,7 @@ public class Question {
     private String title;
     private int number;
     private Test test;
-   // private Set<Answer> answers = new HashSet<Answer>();
+    private Set<Answer> answers = new HashSet<Answer>();
 
     public Question(){}
 
@@ -60,11 +60,12 @@ public class Question {
         this.test = test;
     }
 
-//    public Set<Answer> getAnswers() {
-//        return answers;
-//    }
-//
-//    public void setAnswers(Set<Answer> answers) {
-//        this.answers = answers;
-//    }
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "question")
+    public Set<Answer> getAnswers() {
+        return answers;
+    }
+
+    public void setAnswers(Set<Answer> answers) {
+        this.answers = answers;
+    }
 }

@@ -1,9 +1,6 @@
 package db;
 
-import db.entity.Question;
-import db.entity.Test;
-import db.entity.TestCategory;
-import db.entity.User;
+import db.entity.*;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
@@ -66,7 +63,13 @@ public class DBController implements DBControllerMethods{
         //Set<Question> questions = new HashSet<Question>();
         //questions.add(new Question("hey",1,test1));
 
-        Question question1 = new Question("hey",1,test1);
+        Question question1 = new Question("question1",1,test1);
+
+        Answer answer1 = new Answer("answer1",1,question1);
+        Answer answer2 = new Answer("answer2",2,question1);
+
+        question1.getAnswers().add(answer1);
+        question1.getAnswers().add(answer2);
 
         test1.getQuestions().add(question1);
 
@@ -83,6 +86,8 @@ public class DBController implements DBControllerMethods{
 //        session.save(user1);
         session.save(test1);
         session.save(question1);
+        session.save(answer1);
+        session.save(answer2);
 
 
 
