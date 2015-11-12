@@ -1,14 +1,13 @@
 package db.DAOImpl;
 
 import db.DAO.UserDAO;
-import db.HibernateUtil;
+import db.Hibernate.HibernateUtil;
 import db.entity.User;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
 import java.sql.SQLException;
 
-import java.text.Format;
 import java.util.List;
 
 public class UserDAOImpl implements UserDAO {

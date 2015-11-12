@@ -1,5 +1,6 @@
 package db;
 
+import db.Hibernate.Factory;
 import db.entity.*;
 import org.hibernate.SessionFactory;
 

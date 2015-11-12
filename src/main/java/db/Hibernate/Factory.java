@@ -1,4 +1,4 @@
-package db;
+package db.Hibernate;
 
 import db.DAO.*;
 import db.DAOImpl.TestDAOImpl;

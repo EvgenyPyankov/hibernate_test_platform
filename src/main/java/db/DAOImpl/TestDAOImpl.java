@@ -1,7 +1,7 @@
 package db.DAOImpl;
 
 import db.DAO.TestDAO;
-import db.HibernateUtil;
+import db.Hibernate.HibernateUtil;
 import db.entity.Test;
 import org.hibernate.Session;
 
