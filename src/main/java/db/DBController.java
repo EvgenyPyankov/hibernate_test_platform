@@ -9,15 +9,15 @@ import java.util.List;
 public class DBController implements DBControllerMethods{
     private static SessionFactory sessionFactory;
 
-    public Test getTestById(int id) {
+    public Test getTestById(int id) throws SQLException{
         return null;
     }
 
-    public void addTest(Test test) {
+    public void addTest(Test test) throws SQLException{
 
     }
 
-    public void addUser(User user) {
+    public void addUser(User user) throws SQLException{
         try {
             Factory.getInstance().getUserDAO().addUser(user);
         } catch (SQLException e) {
@@ -25,7 +25,7 @@ public class DBController implements DBControllerMethods{
         }
     }
 
-    public User getUserByLogin(String login) {
+    public User getUserByLogin(String login) throws SQLException{
         User user = null;
         try {
             user = Factory.getInstance().getUserDAO().getUserByLogin(login);
@@ -35,7 +35,7 @@ public class DBController implements DBControllerMethods{
         return user;
     }
 
-    public User getUserByEmail(String email) {
+    public User getUserByEmail(String email)throws SQLException {
         User user = null;
         try {
            user = Factory.getInstance().getUserDAO().getUserByEmail(email);
@@ -43,6 +43,10 @@ public class DBController implements DBControllerMethods{
             e.printStackTrace();
         }
         return user;
+    }
+
+    public List<Test> getTests()throws SQLException{
+        return Factory.getInstance().getTestDAO().getTests();
     }
 
     public DBController() {
@@ -123,14 +127,5 @@ public class DBController implements DBControllerMethods{
 
     }
 
-    public List<Test> getTests(){
-        List<Test>tests = null;
 
-       try {
-            tests= Factory.getInstance().getTestDAO().getTests();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return tests;
-    }
 }

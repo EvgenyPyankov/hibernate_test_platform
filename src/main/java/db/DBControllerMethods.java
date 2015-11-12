@@ -4,19 +4,18 @@ import db.entity.*;
 
 import java.sql.SQLException;
 import java.util.List;
-import java.util.*;
 
 public interface DBControllerMethods {
     //put methods you need here
 
     //tests
-    Test getTestById(int id);
-    List<Test> getTests();
-    void addTest(Test test);
+    Test getTestById(int id) throws SQLException;
+    List<Test> getTests() throws SQLException;
+    void addTest(Test test) throws SQLException;
 
 
     //users
-    void addUser(User user);
-    User getUserByLogin(String login);
-    User getUserByEmail(String email);
+    void addUser(User user) throws SQLException;
+    User getUserByLogin(String login) throws SQLException;
+    User getUserByEmail(String email) throws SQLException;
 }
