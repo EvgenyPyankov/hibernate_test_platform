@@ -26,6 +26,7 @@ public class Test {
        // this.users=users;
     }
 
+
 //    public void addUser(User user){
 //        users.add(user);
 //    }
@@ -60,7 +61,7 @@ public class Test {
         this.testCategory = testCategory;
     }
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "test")
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "test")
     public Set<Question> getQuestions() {
         return questions;
     }

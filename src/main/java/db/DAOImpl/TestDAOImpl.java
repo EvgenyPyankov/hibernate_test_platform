@@ -1,7 +1,9 @@
 package db.DAOImpl;
 
 import db.DAO.TestDAO;
-import db.Hibernate.HibernateUtil;
+import db.entity.Answer;
+import db.entity.Question;
+import db.hibernate.HibernateUtil;
 import db.entity.Test;
 import org.hibernate.Session;
 
@@ -13,7 +15,9 @@ public class TestDAOImpl implements TestDAO {
         Session session = null;
         session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
+
         session.save(test);
+
         session.getTransaction().commit();
         if (session != null && session.isOpen()) {
             session.close();

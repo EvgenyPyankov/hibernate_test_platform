@@ -16,10 +16,9 @@ public class Answer {
 
     public Answer(){}
 
-    public Answer(String title, int number, Question question) {
+    public Answer(int number, String title) {
         this.title = title;
         this.number = number;
-        this.question = question;
     }
 
     @Id

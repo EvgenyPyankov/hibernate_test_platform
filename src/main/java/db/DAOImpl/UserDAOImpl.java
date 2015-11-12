@@ -1,7 +1,7 @@
 package db.DAOImpl;
 
 import db.DAO.UserDAO;
-import db.Hibernate.HibernateUtil;
+import db.hibernate.HibernateUtil;
 import db.entity.User;
 import org.hibernate.Query;
 import org.hibernate.Session;

@@ -15,10 +15,17 @@ public class Question {
 
     public Question(){}
 
-    public Question(String title, int number, Test test) {
+    public Question(int number,String title, Set<Answer> answers,Test test) {
         this.title = title;
         this.number = number;
         this.test=test;
+        this.answers = answers;
+    }
+
+    public Question(int number, String title, Set<Answer>answers){
+        this.title = title;
+        this.number = number;
+        this.answers = answers;
     }
 
     @Id
@@ -60,7 +67,7 @@ public class Question {
         this.test = test;
     }
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "question")
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "question")
     public Set<Answer> getAnswers() {
         return answers;
     }
