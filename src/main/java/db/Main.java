@@ -22,7 +22,6 @@ public class Main {
 //            e.printStackTrace();
 //        }
 
-//        db.addUser(new User("John","king@mail.ru",777));
 
 //        try {
 //            db.addUser(new User("Max","yeahyeah@gmail.ru",777));
@@ -30,7 +29,7 @@ public class Main {
 //            e.printStackTrace();
 //        }
 
-        User user1 = null;
+        //     User user1 = null;
 //        try {
 //            user1 = db.getUserByEmail("king@mail.ru");
 //            System.out.println(user1.toString());
@@ -58,13 +57,9 @@ public class Main {
 
         Set<Question> questions;
         Set<Answer> answers;
-        Set<Answer> answers1;
 
         questions = new HashSet<Question>();
         answers = new HashSet<Answer>();
-        answers1 = new HashSet<Answer>();
-
-
 
 
 
@@ -74,28 +69,27 @@ public class Main {
         answers.add(new Answer(4, "rather no"));
         answers.add(new Answer(5, "no"));
 
-        answers1.add(new Answer(1, "yesff"));
-        answers1.add(new Answer(2, "rathedfr yes"));
-        answers1.add(new Answer(3, "i dofn't know"));
-        answers1.add(new Answer(4, "rathfer no"));
-        answers1.add(new Answer(5, "nof"));
 
 
 
-        questions.add(new Question(1, "I am able to relax", answers));
-        questions.add(new Question(2, "I tend to focus on upsetting situations or events happening in my life", answers));
-        questions.add(new Question(3, "I feel fearful for no reason", answers));
-        questions.add(new Question(4, "I am as happy as the people around me", answers));
-        questions.add(new Question(5, "I have diarrhea, constipation, or other digestive problems", answers));
-        questions.add(new Question(6, "I have a dry mouth", answers1));
-        questions.add(new Question(7, "When someone snaps at me, I spend the rest of the day thinking about it", answers));
-        questions.add(new Question(8, "No matter what I do, I can't get my mind off my problems", answers));
+
+        questions.add(new Question(1, "I am able to relax", answers,1));
+        questions.add(new Question(2, "I tend to focus on upsetting situations or events happening in my life", answers,1));
+        questions.add(new Question(3, "I feel fearful for no reason", answers,1));
+        questions.add(new Question(4, "I am as happy as the people around me", answers,1));
+        questions.add(new Question(5, "I have diarrhea, constipation, or other digestive problems", answers,1));
+        questions.add(new Question(6, "I have a dry mouth", answers,1));
+        questions.add(new Question(7, "When someone snaps at me, I spend the rest of the day thinking about it", answers,1));
+        questions.add(new Question(8, "No matter what I do, I can't get my mind off my problems", answers,1));
 
         try {
-            db.addTest(new Test("new Test",TestCategory.QUESTIONAIRE,questions));
+            db.addTest(new Test("new Test",TestCategory.QUESTIONAIRE,questions, db.getUserByLogin("John")));
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
+
+
 
     }
 

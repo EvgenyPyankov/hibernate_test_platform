@@ -8,7 +8,6 @@ import java.sql.SQLException;
 import java.util.*;
 
 public class DBController implements DBControllerMethods{
-    private static SessionFactory sessionFactory;
 
     public Test getTestById(int id) throws SQLException{
         return Factory.getInstance().getTestDAO().getTestById(id);

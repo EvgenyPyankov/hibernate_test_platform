@@ -19,6 +19,9 @@
         <mapping class="db.entity.User"/>
         <mapping class="db.entity.Question"/>
         <mapping class="db.entity.Answer"/>
+        <mapping class="db.entity.PossibleResult"/>
+        <mapping class="db.entity.UserPass"/>
+        <mapping class="db.entity.UserAnswer"/>
         <!-- DB schema will be updated if needed -->
         <!-- <property name="hbm2ddl.auto">update</property> -->
     </session-factory>

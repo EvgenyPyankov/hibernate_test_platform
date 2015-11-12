@@ -1,18 +1,20 @@
 package db.entity;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "answers")
 public class Answer {
 
     private int idAnswer;
-
     private String title;
-
     private int number;
-
     private Question question;
+    private int weight;
+    private int isChoosed;
+    private Set<UserAnswer> userAnswers = new HashSet<UserAnswer>();
 
     public Answer(){}
 
@@ -58,5 +60,32 @@ public class Answer {
 
     public void setQuestion(Question question) {
         this.question = question;
+    }
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "answer")
+    public Set<UserAnswer> getUserAnswers() {
+        return userAnswers;
+    }
+
+    public void setUserAnswers(Set<UserAnswer> userAnswers) {
+        this.userAnswers = userAnswers;
+    }
+
+    @Column(name="weight")
+    public int getWeight() {
+        return weight;
+    }
+
+    public void setWeight(int weight) {
+        this.weight = weight;
+    }
+
+    @Column(name="is_choosed")
+    public int isChoosed() {
+        return isChoosed;
+    }
+
+    public void setIsChoosed(int isChoosed) {
+        this.isChoosed = isChoosed;
     }
 }

@@ -1,8 +1,11 @@
 package db.entity;
 
 import com.sun.xml.internal.messaging.saaj.packaging.mime.util.QEncoderStream;
+import db.DBController;
 
 import javax.persistence.*;
+import java.sql.SQLData;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -13,23 +16,27 @@ public class Test {
     private String title;
     private TestCategory testCategory;
     private Set<Question>questions = new HashSet<Question>();
-   // private Set<User> users = new HashSet<User>();
+    private String description;
+    private Date date;
+    private User author;
+    private Set<PossibleResult> possibleResults = new HashSet<PossibleResult>();
+    private Set<UserPass> userPassSet = new HashSet<UserPass>();
 
 
 
-    public Test(){}
+    public Test(){
+        date = new Date();
+    }
 
-    public Test(String title, TestCategory testCategory,Set<Question> questions){
+    public Test(String title, TestCategory testCategory,Set<Question> questions, User author){
         this.title = title;
         this.testCategory=testCategory;
         this.questions=questions;
-       // this.users=users;
+        date = new Date();
+        this.author=author;
     }
 
 
-//    public void addUser(User user){
-//        users.add(user);
-//    }
 
     @Id
     @Column(name = "id_test")
@@ -70,16 +77,52 @@ public class Test {
         this.questions = questions;
     }
 
-//    @ManyToMany(cascade=CascadeType.ALL)
-//    @JoinTable(name="user_pass", joinColumns = { @JoinColumn(name = "id_test") }, inverseJoinColumns = { @JoinColumn(name = "id_user") })
-//    public Set<User> getUsers() {
-//        return users;
-//    }
-//
-//    public void setUsers(Set users) {
-//        this.users = users;
-//    }
 
+
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_author", nullable = false)
+    public User getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(User author) {
+        this.author = author;
+    }
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "test")
+    public Set<PossibleResult> getPossibleResults() {
+        return possibleResults;
+    }
+
+    public void setPossibleResults(Set<PossibleResult> possibleResults) {
+        this.possibleResults = possibleResults;
+    }
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "test")
+    public Set<UserPass> getUserPassSet() {
+        return userPassSet;
+    }
+
+    public void setUserPassSet(Set<UserPass> userPassSet) {
+        this.userPassSet = userPassSet;
+    }
 
     @Override
     public String toString() {

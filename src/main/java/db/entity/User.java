@@ -11,7 +11,8 @@ public class User {
     private String login;
     private int password;
     private String email;
-   // private Set<Test> tests = new HashSet<Test>();
+    private Set<Test> tests = new HashSet<Test>();
+    private Set<UserPass> userPassSet = new HashSet<UserPass>();
 
 
 
@@ -21,12 +22,8 @@ public class User {
         this.login = login;
         this.email=email;
         this.password=password;
-       // this.tests=tests;
     }
 
-   // public void addTest(Test test){
-    //    tests.add(test);
-    //}
 
     @Id
     @Column(name = "id_user")
@@ -66,14 +63,24 @@ public class User {
         this.email = email;
     }
 
-//    @ManyToMany(mappedBy = "users")
-//    public Set<Test> getTests() {
-//        return tests;
-//    }
-//
-//    public void setTests(Set tests) {
-//        this.tests = tests;
-//    }
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "author")
+    public Set<Test> getTests() {
+        return tests;
+    }
+
+    public void setTests(Set<Test> tests) {
+        this.tests = tests;
+    }
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+    public Set<UserPass> getUserPassSet() {
+        return userPassSet;
+    }
+
+    public void setUserPassSet(Set<UserPass> userPassSet) {
+        this.userPassSet = userPassSet;
+    }
 
     @Override
     public String toString() {

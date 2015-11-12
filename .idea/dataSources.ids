@@ -12,37 +12,78 @@
       <column name="title" sqlType="VARCHAR" precision="100" scale="0" nullable="false" jdbcType="12"/>
       <column name="number" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
       <column name="id_question" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="weight" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="is_choosed" sqlType="TINYINT" precision="3" scale="0" nullable="true" jdbcType="-6"/>
       <primary-key name="PRIMARY" columns="id_answer"/>
       <foreign-key name="fk_answers_questions1" columns="id_question" ref-table="questions" ref-schema="" ref-catalog="test_platform2" ref-columns="id_question" update-rule="3" delete-rule="3" deferrability="2"/>
+      <exported-key name="fk_user_answers_answers1" table="user_answers" schema="" catalog="test_platform2" columns="id_answer"/>
       <index name="fk_answers_questions1_idx" unique="false" columns="id_question"/>
+    </table>
+    <table name="possible_results" schema="" catalog="test_platform2" type="TABLE">
+      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="text" sqlType="VARCHAR" precision="600" scale="0" nullable="false" jdbcType="12"/>
+      <column name="min_limit" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="max_limit" sqlType="VARCHAR" precision="45" scale="0" nullable="true" jdbcType="12"/>
+      <column name="id_test" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <foreign-key name="fk_possible_results_tests1" columns="id_test" ref-table="tests" ref-schema="" ref-catalog="test_platform2" ref-columns="id_test" update-rule="3" delete-rule="3" deferrability="2"/>
+      <exported-key name="fk_user_pass_possible_results1" table="user_pass" schema="" catalog="test_platform2" columns="id_result"/>
+      <index name="fk_possible_results_tests1_idx" unique="false" columns="id_test"/>
     </table>
     <table name="questions" schema="" catalog="test_platform2" type="TABLE">
       <column name="id_question" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
       <column name="title" sqlType="VARCHAR" precision="300" scale="0" nullable="false" jdbcType="12"/>
       <column name="number" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
       <column name="id_test" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="question_type" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
       <primary-key name="PRIMARY" columns="id_question"/>
       <foreign-key name="fk_questions_tests1" columns="id_test" ref-table="tests" ref-schema="" ref-catalog="test_platform2" ref-columns="id_test" update-rule="3" delete-rule="3" deferrability="2"/>
       <exported-key name="fk_answers_questions1" table="answers" schema="" catalog="test_platform2" columns="id_question"/>
+      <exported-key name="fk_user_answers_questions1" table="user_answers" schema="" catalog="test_platform2" columns="id_question"/>
       <index name="fk_questions_tests1_idx" unique="false" columns="id_test"/>
     </table>
     <table name="tests" schema="" catalog="test_platform2" type="TABLE">
       <column name="id_test" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
       <column name="title" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
       <column name="test_category" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="description" sqlType="VARCHAR" precision="400" scale="0" nullable="true" jdbcType="12"/>
+      <column name="date" sqlType="DATE" precision="10" scale="0" nullable="true" jdbcType="91"/>
+      <column name="id_author" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
       <primary-key name="PRIMARY" columns="id_test"/>
+      <foreign-key name="fk_tests_users1" columns="id_author" ref-table="users" ref-schema="" ref-catalog="test_platform2" ref-columns="id_user" update-rule="3" delete-rule="3" deferrability="2"/>
+      <exported-key name="fk_possible_results_tests1" table="possible_results" schema="" catalog="test_platform2" columns="id_test"/>
       <exported-key name="fk_questions_tests1" table="questions" schema="" catalog="test_platform2" columns="id_test"/>
-      <exported-key name="fk_users_has_tests_tests1" table="user_pass" schema="" catalog="test_platform2" columns="id_test"/>
+      <exported-key name="fk_user_pass_tests1" table="user_pass" schema="" catalog="test_platform2" columns="id_test"/>
+      <index name="fk_tests_users1_idx" unique="false" columns="id_author"/>
+    </table>
+    <table name="user_answers" schema="" catalog="test_platform2" type="TABLE">
+      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="text" sqlType="VARCHAR" precision="500" scale="0" nullable="true" jdbcType="12"/>
+      <column name="id_user_pass" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="id_question" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="id_answer" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <foreign-key name="fk_user_answers_answers1" columns="id_answer" ref-table="answers" ref-schema="" ref-catalog="test_platform2" ref-columns="id_answer" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="fk_user_answers_questions1" columns="id_question" ref-table="questions" ref-schema="" ref-catalog="test_platform2" ref-columns="id_question" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="fk_user_answers_user_pass1" columns="id_user_pass" ref-table="user_pass" ref-schema="" ref-catalog="test_platform2" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <index name="fk_user_answers_answers1_idx" unique="false" columns="id_answer"/>
+      <index name="fk_user_answers_questions1_idx" unique="false" columns="id_question"/>
+      <index name="fk_user_answers_user_pass1_idx" unique="false" columns="id_user_pass"/>
     </table>
     <table name="user_pass" schema="" catalog="test_platform2" type="TABLE">
-      <column name="id_user" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
-      <column name="id_test" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
       <column name="date" sqlType="DATE" precision="10" scale="0" nullable="true" jdbcType="91"/>
-      <primary-key name="PRIMARY" columns="id_user,id_test"/>
-      <foreign-key name="fk_users_has_tests_tests1" columns="id_test" ref-table="tests" ref-schema="" ref-catalog="test_platform2" ref-columns="id_test" update-rule="3" delete-rule="3" deferrability="2"/>
-      <foreign-key name="fk_users_has_tests_users" columns="id_user" ref-table="users" ref-schema="" ref-catalog="test_platform2" ref-columns="id_user" update-rule="3" delete-rule="3" deferrability="2"/>
-      <index name="fk_users_has_tests_tests1_idx" unique="false" columns="id_test"/>
-      <index name="fk_users_has_tests_users_idx" unique="false" columns="id_user"/>
+      <column name="id_test" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="id_user" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="id_result" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <foreign-key name="fk_user_pass_possible_results1" columns="id_result" ref-table="possible_results" ref-schema="" ref-catalog="test_platform2" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="fk_user_pass_tests1" columns="id_test" ref-table="tests" ref-schema="" ref-catalog="test_platform2" ref-columns="id_test" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="fk_user_pass_users1" columns="id_user" ref-table="users" ref-schema="" ref-catalog="test_platform2" ref-columns="id_user" update-rule="3" delete-rule="3" deferrability="2"/>
+      <exported-key name="fk_user_answers_user_pass1" table="user_answers" schema="" catalog="test_platform2" columns="id_user_pass"/>
+      <index name="fk_user_pass_possible_results1_idx" unique="false" columns="id_result"/>
+      <index name="fk_user_pass_tests1_idx" unique="false" columns="id_test"/>
+      <index name="fk_user_pass_users1_idx" unique="false" columns="id_user"/>
     </table>
     <table name="users" schema="" catalog="test_platform2" type="TABLE">
       <column name="id_user" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
@@ -50,7 +91,8 @@
       <column name="password" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
       <column name="email" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
       <primary-key name="PRIMARY" columns="id_user"/>
-      <exported-key name="fk_users_has_tests_users" table="user_pass" schema="" catalog="test_platform2" columns="id_user"/>
+      <exported-key name="fk_tests_users1" table="tests" schema="" catalog="test_platform2" columns="id_author"/>
+      <exported-key name="fk_user_pass_users1" table="user_pass" schema="" catalog="test_platform2" columns="id_user"/>
     </table>
   </data-source>
 </component>

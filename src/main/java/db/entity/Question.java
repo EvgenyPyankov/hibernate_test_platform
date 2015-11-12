@@ -12,20 +12,18 @@ public class Question {
     private int number;
     private Test test;
     private Set<Answer> answers = new HashSet<Answer>();
+    private int questionType;
+    private Set<UserAnswer> userAnswers = new HashSet<UserAnswer>();
 
     public Question(){}
 
-    public Question(int number,String title, Set<Answer> answers,Test test) {
-        this.title = title;
-        this.number = number;
-        this.test=test;
-        this.answers = answers;
-    }
 
-    public Question(int number, String title, Set<Answer>answers){
+
+    public Question(int number, String title, Set<Answer>answers, int questionType){
         this.title = title;
         this.number = number;
         this.answers = answers;
+        this.questionType = questionType;
     }
 
     @Id
@@ -74,5 +72,23 @@ public class Question {
 
     public void setAnswers(Set<Answer> answers) {
         this.answers = answers;
+    }
+
+    @Column(name="question_type")
+    public int getQuestionType() {
+        return questionType;
+    }
+
+    public void setQuestionType(int questionType) {
+        this.questionType = questionType;
+    }
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "question")
+    public Set<UserAnswer> getUserAnswers() {
+        return userAnswers;
+    }
+
+    public void setUserAnswers(Set<UserAnswer> userAnswers) {
+        this.userAnswers = userAnswers;
     }
 }
