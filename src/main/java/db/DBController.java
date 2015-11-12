@@ -10,39 +10,23 @@ public class DBController implements DBControllerMethods{
     private static SessionFactory sessionFactory;
 
     public Test getTestById(int id) throws SQLException{
-        return null;
+        return Factory.getInstance().getTestDAO().getTestById(id);
     }
 
     public void addTest(Test test) throws SQLException{
-
+        Factory.getInstance().getTestDAO().addTest(test);
     }
 
     public void addUser(User user) throws SQLException{
-        try {
-            Factory.getInstance().getUserDAO().addUser(user);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        Factory.getInstance().getUserDAO().addUser(user);
     }
 
     public User getUserByLogin(String login) throws SQLException{
-        User user = null;
-        try {
-            user = Factory.getInstance().getUserDAO().getUserByLogin(login);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return user;
+        return Factory.getInstance().getUserDAO().getUserByLogin(login);
     }
 
     public User getUserByEmail(String email)throws SQLException {
-        User user = null;
-        try {
-           user = Factory.getInstance().getUserDAO().getUserByEmail(email);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return user;
+           return Factory.getInstance().getUserDAO().getUserByEmail(email);
     }
 
     public List<Test> getTests()throws SQLException{

@@ -21,12 +21,13 @@ public class TestDAOImpl implements TestDAO {
         }
     }
 
-    public Test getTestById(Test test) throws SQLException {
-        return null;
+    public Test getTestById(int id) throws SQLException {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Test test =  (Test) session.get(Test.class, id);
+        return test;
     }
 
     public List<Test> getTests() throws SQLException {
-
         Session session = null;
         List<Test> tests = null;
         session = HibernateUtil.getSessionFactory().openSession();
