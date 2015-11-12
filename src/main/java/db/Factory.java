@@ -1,12 +1,12 @@
 package db;
 
 import db.DAO.*;
-import db.DAOImpl.*;
+import db.DAOImpl.TestDAOImpl;
+import db.DAOImpl.UserDAOImpl;
 
 public class Factory {
     private static TestDAO testDAO = null;
     private static UserDAO userDAO = null;
-
     private static Factory instance = null;
 
     public static synchronized Factory getInstance(){
@@ -24,9 +24,10 @@ public class Factory {
     }
 
     public UserDAO getUserDAO(){
-        if (userDAO==null){
+        if (userDAO == null){
             userDAO = new UserDAOImpl();
         }
         return userDAO;
     }
+
 }
