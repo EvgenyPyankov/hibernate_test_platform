@@ -15,6 +15,8 @@ public class Test {
     private Set<Question>questions = new HashSet<Question>();
    // private Set<User> users = new HashSet<User>();
 
+
+
     public Test(){}
 
     public Test(String title, TestCategory testCategory,Set<Question> questions){
@@ -76,6 +78,17 @@ public class Test {
 //    public void setUsers(Set users) {
 //        this.users = users;
 //    }
+
+
+    @Override
+    public String toString() {
+        return "Test{" +
+                "idTest=" + idTest +
+                ", title='" + title + '\'' +
+                ", testCategory=" + testCategory +
+                ", questions=" + questions +
+                '}';
+    }
 
 
 }
