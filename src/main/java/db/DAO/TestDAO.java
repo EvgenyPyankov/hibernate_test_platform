@@ -1,7 +1,7 @@
 package db.DAO;
 
 import java.sql.*;
-import db.entity.*;
+import db.entity.Test;
 import java.util.*;
 
 public interface TestDAO {

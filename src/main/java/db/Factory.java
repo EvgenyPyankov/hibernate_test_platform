@@ -5,6 +5,7 @@ import db.DAOImpl.*;
 
 public class Factory {
     private static TestDAO testDAO = null;
+    private static UserDAO userDAO = null;
 
     private static Factory instance = null;
 
@@ -20,5 +21,12 @@ public class Factory {
             testDAO = new TestDAOImpl();
         }
         return testDAO;
+    }
+
+    public UserDAO getUserDAO(){
+        if (userDAO==null){
+            userDAO = new UserDAOImpl();
+        }
+        return userDAO;
     }
 }

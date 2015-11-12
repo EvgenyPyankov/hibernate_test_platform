@@ -1,22 +1,49 @@
 package db;
 
 import db.entity.*;
-import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
-import org.hibernate.service.ServiceRegistry;
-import org.hibernate.service.ServiceRegistryBuilder;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 public class DBController implements DBControllerMethods{
     private static SessionFactory sessionFactory;
 
+    public Test getTestById(int id) {
+        return null;
+    }
 
+    public void addTest(Test test) {
+
+    }
+
+    public void addUser(User user) {
+        try {
+            Factory.getInstance().getUserDAO().addUser(user);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public User getUserByLogin(String login) {
+        User user = null;
+        try {
+            user = Factory.getInstance().getUserDAO().getUserByLogin(login);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return user;
+    }
+
+    public User getUserByEmail(String email) {
+        User user = null;
+        try {
+           user = Factory.getInstance().getUserDAO().getUserByEmail(email);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return user;
+    }
 
     public DBController() {
 //        Configuration configuration = new Configuration().configure();

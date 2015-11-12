@@ -13,10 +13,14 @@ public class User {
     private String email;
    // private Set<Test> tests = new HashSet<Test>();
 
+
+
     public User(){}
 
-    public User(String login, Set<Test> tests){
+    public User(String login, String email, int password){
         this.login = login;
+        this.email=email;
+        this.password=password;
        // this.tests=tests;
     }
 
@@ -70,4 +74,14 @@ public class User {
 //    public void setTests(Set tests) {
 //        this.tests = tests;
 //    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "idUser=" + idUser +
+                ", login='" + login + '\'' +
+                ", password=" + password +
+                ", email='" + email + '\'' +
+                '}';
+    }
 }
