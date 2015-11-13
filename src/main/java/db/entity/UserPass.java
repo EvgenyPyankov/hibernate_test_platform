@@ -44,7 +44,7 @@ public class UserPass {
     }
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_result", nullable = false)
+    @JoinColumn(name = "id_result")
     public PossibleResult getResult() {
         return result;
     }

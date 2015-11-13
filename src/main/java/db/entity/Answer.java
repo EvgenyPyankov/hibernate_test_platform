@@ -52,7 +52,7 @@ public class Answer {
         this.title = title;
     }
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_question", nullable = false)
     public Question getQuestion() {
         return question;
@@ -62,7 +62,7 @@ public class Answer {
         this.question = question;
     }
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "answer")
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "answer")
     public Set<UserAnswer> getUserAnswers() {
         return userAnswers;
     }
@@ -81,7 +81,7 @@ public class Answer {
     }
 
     @Column(name="is_choosed")
-    public int isChoosed() {
+    public int getIsChoosed() {
         return isChoosed;
     }
 

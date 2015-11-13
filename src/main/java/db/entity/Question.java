@@ -14,6 +14,7 @@ public class Question {
     private Set<Answer> answers = new HashSet<Answer>();
     private int questionType;
     private Set<UserAnswer> userAnswers = new HashSet<UserAnswer>();
+    private String answerText;
 
     public Question(){}
 
@@ -55,7 +56,7 @@ public class Question {
         this.number = number;
     }
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_test", nullable = false)
     public Test getTest() {
         return test;
@@ -65,7 +66,7 @@ public class Question {
         this.test = test;
     }
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "question")
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "question")
     public Set<Answer> getAnswers() {
         return answers;
     }
@@ -83,12 +84,21 @@ public class Question {
         this.questionType = questionType;
     }
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "question")
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "question")
     public Set<UserAnswer> getUserAnswers() {
         return userAnswers;
     }
 
     public void setUserAnswers(Set<UserAnswer> userAnswers) {
         this.userAnswers = userAnswers;
+    }
+
+    @Column(name="answer_text")
+    public String getAnswerText() {
+        return answerText;
+    }
+
+    public void setAnswerText(String answerText) {
+        this.answerText = answerText;
     }
 }

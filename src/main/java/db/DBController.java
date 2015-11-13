@@ -32,6 +32,10 @@ public class DBController implements DBControllerMethods{
         Factory.getInstance().getTestDAO().addTest(test);
     }
 
+    public void addPassedTest(Test test, User user) throws SQLException {
+       Factory.getInstance().getTestDAO().addPassedTest(test,user);
+    }
+
     public void addUser(User user) throws SQLException{
         Factory.getInstance().getUserDAO().addUser(user);
     }

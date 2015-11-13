@@ -21,6 +21,7 @@ public class Test {
     private User author;
     private Set<PossibleResult> possibleResults = new HashSet<PossibleResult>();
     private Set<UserPass> userPassSet = new HashSet<UserPass>();
+    private String textResult;
 
 
 
@@ -68,7 +69,7 @@ public class Test {
         this.testCategory = testCategory;
     }
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "test")
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "test")
     public Set<Question> getQuestions() {
         return questions;
     }
@@ -96,7 +97,7 @@ public class Test {
         this.date = date;
     }
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_author", nullable = false)
     public User getAuthor() {
         return author;
@@ -106,7 +107,7 @@ public class Test {
         this.author = author;
     }
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "test")
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "test")
     public Set<PossibleResult> getPossibleResults() {
         return possibleResults;
     }
@@ -115,13 +116,22 @@ public class Test {
         this.possibleResults = possibleResults;
     }
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "test")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "test")
     public Set<UserPass> getUserPassSet() {
         return userPassSet;
     }
 
     public void setUserPassSet(Set<UserPass> userPassSet) {
         this.userPassSet = userPassSet;
+    }
+
+    @Column(name="text_result")
+    public String getTextResult() {
+        return textResult;
+    }
+
+    public void setTextResult(String textResult) {
+        this.textResult = textResult;
     }
 
     @Override
