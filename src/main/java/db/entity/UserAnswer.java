@@ -61,7 +61,7 @@ public class UserAnswer {
     }
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_answer", nullable = false)
+    @JoinColumn(name = "id_answer")
     public Answer getAnswer() {
         return answer;
     }

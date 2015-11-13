@@ -20,4 +20,5 @@ public interface DBControllerMethods {
     void addUser(User user) throws SQLException;
     User getUserByLogin(String login) throws SQLException;
     User getUserByEmail(String email) throws SQLException;
+    User getUserById(int id) throws SQLException;
 }

@@ -15,6 +15,6 @@ public interface TestDAO {
 
     void addPassedTest(Test test, User user) throws SQLException;
 
-    Test getPassedTest(Test test, User user) throws SQLException;
+    Test getPassedTestByUser(Test test, User user) throws SQLException;
 }
 

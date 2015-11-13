@@ -54,4 +54,11 @@ public class UserDAOImpl implements UserDAO {
         if (results != null) return results.get(0);
         return null;
     }
+
+    public User getUserById(int id) throws SQLException {
+            Session session = HibernateUtil.getSessionFactory().openSession();
+            User user =  (User) session.get(User.class, id);
+            if (session.isOpen()) session.close();
+            return user;
+    }
 }

@@ -42,12 +42,16 @@ public class DBController implements DBControllerMethods{
            return Factory.getInstance().getUserDAO().getUserByEmail(email);
     }
 
+    public User getUserById(int id) throws SQLException {
+        return Factory.getInstance().getUserDAO().getUserById(id);
+    }
+
     public List<Test> getTests()throws SQLException{
         return Factory.getInstance().getTestDAO().getTests();
     }
 
     public Test getPassedTest(Test test, User user) throws SQLException {
-        return Factory.getInstance().getTestDAO().getPassedTest(test, user);
+        return Factory.getInstance().getTestDAO().getPassedTestByUser(test, user);
     }
 
     private void deepCopy(Set<Answer> from, Set<Answer>to){

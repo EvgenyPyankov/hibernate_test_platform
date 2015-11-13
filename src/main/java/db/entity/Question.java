@@ -27,6 +27,12 @@ public class Question {
         this.questionType = questionType;
     }
 
+    public Question(int number,String title, int questionType){
+        this.title = title;
+        this.number = number;
+        this.questionType = questionType;
+    }
+
     @Id
     @Column(name = "id_question")
     @GeneratedValue(strategy= GenerationType.AUTO)

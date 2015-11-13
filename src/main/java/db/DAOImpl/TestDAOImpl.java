@@ -43,14 +43,22 @@ public class TestDAOImpl implements TestDAO {
         userPass.setUser(user);
         userPass.setDate(new Date());
         session.save(userPass);
+        UserAnswer userAnswer;
         for (Question question:test.getQuestions()){
             if (question.getQuestionType()==3){
-
+                userAnswer = new UserAnswer();
+                userAnswer.setQuestion(question);
+                question.getUserAnswers().add(userAnswer);
+                userAnswer.setAnswer(null);
+                userAnswer.setText(question.getAnswerText());
+                userAnswer.setUserPass(userPass);
+                userPass.getUserAnswers().add(userAnswer);
+                session.save(userAnswer);
             }
             else {
                 for (Answer answer:question.getAnswers()){
                     if (answer.getIsChoosed()==1) {
-                        UserAnswer userAnswer = new UserAnswer();
+                         userAnswer = new UserAnswer();
                         userAnswer.setQuestion(question);
                         question.getUserAnswers().add(userAnswer);
                         userAnswer.setAnswer(answer);
@@ -70,7 +78,7 @@ public class TestDAOImpl implements TestDAO {
         }
     }
 
-    public Test getPassedTest(Test test, User user) throws SQLException {
+    public Test getPassedTestByUser(Test test, User user) throws SQLException {
         Session session = HibernateUtil.getSessionFactory().openSession();
         List<UserPass> results= null;
 

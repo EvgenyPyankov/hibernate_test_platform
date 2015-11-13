@@ -143,16 +143,75 @@ public class Main {
 //            e.printStackTrace();
 //        }
 
+//        try {
+//           Test test = db.getPassedTest(db.getTestById(3),db.getUserByLogin("Max"));
+//            for(Question question:test.getQuestions())
+//                for (Answer answer:question.getAnswers())
+//                    System.out.println(answer.toString());
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+
+//        try {
+//            Test test = db.getTestById(4);
+//
+//                boolean b = false;
+//                for(Question question:test.getQuestions()) {
+//                    b=false;
+//                    if (question.getQuestionType()==3){
+//                        question.setAnswerText("yes this was hard but we did it. I appriciate this");
+//                    }
+//                    else {
+//                        for (Answer answer : question.getAnswers()) {
+//                            if (!b)
+//                                answer.setIsChoosed(1);
+//                            b = true;
+//                        }
+//                    }
+//
+//                }
+//
+//            db.addPassedTest(test, db.getUserByLogin("Evgeny"));
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+
+
+    }
+
+    public static void addTest(){
+        Test test;
+        User user = null;
         try {
-           Test test = db.getPassedTest(db.getTestById(3),db.getUserByLogin("Max"));
-            for(Question question:test.getQuestions())
-                for (Answer answer:question.getAnswers())
-                    System.out.println(answer.toString());
+            user = db.getUserByEmail("hello@gmail.com");
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        Set<Question> questions = new HashSet<Question>();
+        Set<Answer> answers = new HashSet<Answer>();
 
+        answers.add(new Answer(1,"ja"));
+        answers.add(new Answer(2,"nein"));
+        answers.add(new Answer(3,"weiss ich nicht"));
 
+        questions.add(new Question(1,"Who?",answers,1));
+        questions.add(new Question(2,"blablab?",answers,1));
+
+        test = new Test("Test by Evgeny",TestCategory.MATH,questions, user);
+
+        try {
+            db.addTest(test);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void addUser(){
+        try {
+            db.addUser(new User("Evgeny","hello@gmail.com",333));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     public static void addPassedTest(){
@@ -176,6 +235,7 @@ public class Main {
         }
 
     }
+
 
 
 }
