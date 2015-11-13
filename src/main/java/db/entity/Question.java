@@ -12,7 +12,7 @@ public class Question {
     private int number;
     private Test test;
     private Set<Answer> answers = new HashSet<Answer>();
-    private int questionType;
+    private int questionType; // 1 - radio, 2 - checkbox, 3 - text
     private Set<UserAnswer> userAnswers = new HashSet<UserAnswer>();
     private String answerText;
 
@@ -101,4 +101,6 @@ public class Question {
     public void setAnswerText(String answerText) {
         this.answerText = answerText;
     }
+
+
 }

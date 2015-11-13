@@ -1,10 +1,6 @@
 package db.entity;
 
-import com.sun.xml.internal.messaging.saaj.packaging.mime.util.QEncoderStream;
-import db.DBController;
-
 import javax.persistence.*;
-import java.sql.SQLData;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -22,7 +18,6 @@ public class Test {
     private Set<PossibleResult> possibleResults = new HashSet<PossibleResult>();
     private Set<UserPass> userPassSet = new HashSet<UserPass>();
     private String textResult;
-
 
 
     public Test(){
@@ -78,9 +73,6 @@ public class Test {
         this.questions = questions;
     }
 
-
-
-
     public String getDescription() {
         return description;
     }
@@ -134,15 +126,7 @@ public class Test {
         this.textResult = textResult;
     }
 
-    @Override
-    public String toString() {
-        return "Test{" +
-                "idTest=" + idTest +
-                ", title='" + title + '\'' +
-                ", testCategory=" + testCategory +
-                ", questions=" + questions +
-                '}';
-    }
+
 
 
 }

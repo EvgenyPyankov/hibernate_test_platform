@@ -127,25 +127,30 @@ public class Main {
 
 
 
-       addPassedTest();
-        int i=0;
-        try {
-            Test test = db.getTestById(3);
-            for (Question question:test.getQuestions()){
-                i=0;
-                for (UserAnswer item:question.getUserAnswers()){
-                    i++;
-                }
-                System.out.println(i);
-            }
+//       addPassedTest();
+//        int i=0;
+//        try {
+//            Test test = db.getTestById(3);
+//            for (Question question:test.getQuestions()){
+//                i=0;
+//                for (UserAnswer item:question.getUserAnswers()){
+//                    i++;
+//                }
+//                System.out.println(i);
+//            }
+//
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
 
+        try {
+           Test test = db.getPassedTest(db.getTestById(3),db.getUserByLogin("Max"));
+            for(Question question:test.getQuestions())
+                for (Answer answer:question.getAnswers())
+                    System.out.println(answer.toString());
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
-
-
-
 
 
     }

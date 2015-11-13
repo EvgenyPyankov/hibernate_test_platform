@@ -14,8 +14,6 @@ public class User {
     private Set<Test> tests = new HashSet<Test>();
     private Set<UserPass> userPassSet = new HashSet<UserPass>();
 
-
-
     public User(){}
 
     public User(String login, String email, int password){
@@ -23,7 +21,6 @@ public class User {
         this.email=email;
         this.password=password;
     }
-
 
     @Id
     @Column(name = "id_user")
@@ -82,13 +79,5 @@ public class User {
         this.userPassSet = userPassSet;
     }
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "idUser=" + idUser +
-                ", login='" + login + '\'' +
-                ", password=" + password +
-                ", email='" + email + '\'' +
-                '}';
-    }
+
 }

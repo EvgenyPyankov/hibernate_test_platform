@@ -81,4 +81,6 @@ public class UserPass {
     public void setUserAnswers(Set<UserAnswer> userAnswers) {
         this.userAnswers = userAnswers;
     }
+
+
 }

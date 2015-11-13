@@ -3,6 +3,7 @@ package db.DAOImpl;
 import db.DAO.TestDAO;
 import db.entity.*;
 import db.hibernate.HibernateUtil;
+import org.hibernate.Query;
 import org.hibernate.Session;
 
 import java.sql.SQLException;
@@ -10,16 +11,12 @@ import java.util.*;
 
 public class TestDAOImpl implements TestDAO {
     public void addTest(Test test) throws SQLException {
-        Session session = null;
-        session = HibernateUtil.getSessionFactory().openSession();
+        Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
-
         session.save(test);
-
         session.getTransaction().commit();
         if (session != null && session.isOpen()) {
             session.close();
-
         }
     }
 
@@ -31,9 +28,8 @@ public class TestDAOImpl implements TestDAO {
     }
 
     public List<Test> getTests() throws SQLException {
-        Session session = null;
+        Session session = HibernateUtil.getSessionFactory().openSession();
         List<Test> tests = null;
-        session = HibernateUtil.getSessionFactory().openSession();
         tests = session.createCriteria(Test.class).list();
         if (session.isOpen()) session.close();
         return tests;
@@ -42,15 +38,13 @@ public class TestDAOImpl implements TestDAO {
     public void addPassedTest(Test test, User user) throws SQLException {
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
-
-
         UserPass userPass = new UserPass();
         userPass.setTest(test);
         userPass.setUser(user);
         userPass.setDate(new Date());
         session.save(userPass);
         for (Question question:test.getQuestions()){
-            if (question.getQuestionType()==2){
+            if (question.getQuestionType()==3){
 
             }
             else {
@@ -63,23 +57,46 @@ public class TestDAOImpl implements TestDAO {
                         answer.getUserAnswers().add(userAnswer);
                         userAnswer.setUserPass(userPass);
                         userPass.getUserAnswers().add(userAnswer);
-                        // session.save(answer);
                         session.save(userAnswer);
                     }
                 }
-                //session.save(question);
             }
-
         }
-
-
 
         session.getTransaction().commit();
 
         if (session != null && session.isOpen()) {
             session.close();
+        }
+    }
 
+    public Test getPassedTest(Test test, User user) throws SQLException {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        List<UserPass> results= null;
+
+        String hql = String.format("FROM UserPass E WHERE E.test = %d AND E.user=%d",test.getIdTest(),user.getIdUser());
+        Query query = session.createQuery(hql);
+        results = query.list();
+
+        UserPass up = results.get(0);
+        for (Question question:test.getQuestions()){
+            for (Answer answer:question.getAnswers()){
+                if (question.getQuestionType()==3){
+
+                }
+                else{
+                    Query q = session.createQuery(String.format("FROM UserAnswer E WHERE E.userPass=%d AND E.answer=%d",up.getId(),answer.getIdAnswer()));
+                    List<UserAnswer> ua = q.list();
+                    if (ua.size()>0) answer.setIsChoosed(1);
+                }
+            }
         }
 
+
+        if (session != null && session.isOpen()) {
+            session.close();
+        }
+        if (results!=null) return test;
+        return null;
     }
 }

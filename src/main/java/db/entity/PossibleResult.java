@@ -79,4 +79,6 @@ public class PossibleResult {
     public void setUserPassSet(Set<UserPass> userPassSet) {
         this.userPassSet = userPassSet;
     }
+
+
 }

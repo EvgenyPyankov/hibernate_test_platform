@@ -7,12 +7,14 @@ import db.entity.User;
 import java.util.*;
 
 public interface TestDAO {
-    public void addTest(Test test) throws SQLException;
+    void addTest(Test test) throws SQLException;
 
-    public Test getTestById(int id) throws SQLException;
+    Test getTestById(int id) throws SQLException;
 
-    public List<Test> getTests() throws SQLException;
+    List<Test> getTests() throws SQLException;
 
-    public void addPassedTest(Test test, User user) throws SQLException;
+    void addPassedTest(Test test, User user) throws SQLException;
+
+    Test getPassedTest(Test test, User user) throws SQLException;
 }
 

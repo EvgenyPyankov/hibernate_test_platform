@@ -88,4 +88,17 @@ public class Answer {
     public void setIsChoosed(int isChoosed) {
         this.isChoosed = isChoosed;
     }
+
+    @Override
+    public String toString() {
+        return "Answer{" +
+                "idAnswer=" + idAnswer +
+                ", title='" + title + '\'' +
+                ", number=" + number +
+                ", question=" + question +
+                ", weight=" + weight +
+                ", isChoosed=" + isChoosed +
+                ", userAnswers=" + userAnswers +
+                '}';
+    }
 }

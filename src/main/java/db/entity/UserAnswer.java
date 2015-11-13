@@ -69,4 +69,6 @@ public class UserAnswer {
     public void setAnswer(Answer answer) {
         this.answer = answer;
     }
+
+
 }

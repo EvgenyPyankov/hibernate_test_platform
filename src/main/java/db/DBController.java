@@ -2,7 +2,6 @@ package db;
 
 import db.hibernate.Factory;
 import db.entity.*;
-import org.hibernate.SessionFactory;
 
 import java.sql.SQLException;
 import java.util.*;
@@ -11,11 +10,6 @@ public class DBController implements DBControllerMethods{
 
     public Test getTestById(int id) throws SQLException{
         return Factory.getInstance().getTestDAO().getTestById(id);
-    }
-
-    private void deepCopy(Set<Answer> from, Set<Answer>to){
-        for(Answer answer:from)
-            to.add(new Answer(answer.getNumber(),answer.getTitle()));
     }
 
     public void addTest(Test test) throws SQLException{
@@ -52,8 +46,13 @@ public class DBController implements DBControllerMethods{
         return Factory.getInstance().getTestDAO().getTests();
     }
 
-    public DBController() {
+    public Test getPassedTest(Test test, User user) throws SQLException {
+        return Factory.getInstance().getTestDAO().getPassedTest(test, user);
+    }
 
+    private void deepCopy(Set<Answer> from, Set<Answer>to){
+        for(Answer answer:from)
+            to.add(new Answer(answer.getNumber(),answer.getTitle()));
     }
 
 
