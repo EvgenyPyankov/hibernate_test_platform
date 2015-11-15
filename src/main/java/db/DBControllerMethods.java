@@ -14,6 +14,7 @@ public interface DBControllerMethods {
     void addTest(Test test) throws SQLException;
     void addPassedTest(Test test, User user) throws SQLException;
     Test getPassedTest(Test test,User user) throws SQLException;
+    List<UserPass> getPassedTestsByUser(User user) throws SQLException;
 
 
     //users

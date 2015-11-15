@@ -54,6 +54,10 @@ public class DBController implements DBControllerMethods{
         return Factory.getInstance().getTestDAO().getPassedTestByUser(test, user);
     }
 
+    public List<UserPass> getPassedTestsByUser(User user) throws SQLException {
+        return Factory.getInstance().getTestDAO().getPassedTestsByUser(user);
+    }
+
     private void deepCopy(Set<Answer> from, Set<Answer>to){
         for(Answer answer:from)
             to.add(new Answer(answer.getNumber(),answer.getTitle()));

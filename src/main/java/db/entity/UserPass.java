@@ -82,5 +82,14 @@ public class UserPass {
         this.userAnswers = userAnswers;
     }
 
-
+    @Override
+    public String toString() {
+        return "UserPass{" +
+                "id=" + id +
+                ", date=" + date +
+                ", userAnswers=" + userAnswers +
+                ", test=" + test.getTitle() +
+                ", user=" + user.getLogin() +
+                '}';
+    }
 }

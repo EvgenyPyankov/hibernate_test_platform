@@ -90,7 +90,12 @@ public class TestDAOImpl implements TestDAO {
         for (Question question:test.getQuestions()){
             for (Answer answer:question.getAnswers()){
                 if (question.getQuestionType()==3){
-
+                    Query q =session.createQuery("FROM UserAnswer E WHERE E.userPass=:user_pass AND E.question=:_question");
+                    q.setParameter("user_pass",up);
+                    q.setParameter("_question",question);
+                    List<UserAnswer> userAnswers = q.list();
+                    UserAnswer userAnswer = userAnswers.get(0);
+                    question.setAnswerText(userAnswer.getText());
                 }
                 else{
                     Query q = session.createQuery(String.format("FROM UserAnswer E WHERE E.userPass=%d AND E.answer=%d",up.getId(),answer.getIdAnswer()));
@@ -106,5 +111,15 @@ public class TestDAOImpl implements TestDAO {
         }
         if (results!=null) return test;
         return null;
+    }
+
+    public List<UserPass> getPassedTestsByUser(User user) throws SQLException {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        String hql = "FROM UserPass E WHERE E.user = :id_user";
+        Query query = session.createQuery(hql);
+        query.setParameter("id_user",user);
+        List<UserPass> userPasses = null;
+        userPasses = query.list();
+        return userPasses;
     }
 }

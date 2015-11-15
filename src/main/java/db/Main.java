@@ -176,6 +176,15 @@ public class Main {
 //            e.printStackTrace();
 //        }
 
+        try {
+            User user = db.getUserById(1);
+            List<UserPass> up = db.getPassedTestsByUser(user);
+            for (UserPass u:up)
+                System.out.println(u.toString());
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
 
     }
 
